@@ -1,0 +1,240 @@
+#game
+{
+   position: absolute;
+   top: 16px;
+   left: 16px;
+   bottom: 16px;
+   right: 16px;
+}
+
+.marblepipeline
+{
+   position: absolute;
+   top: 0;
+   left: 0;
+   height: 28px;
+   width: 700px;
+   background-color: #dddddd;   
+}
+
+
+.tilegfx { width: 92px; height: 92px; position: absolute; }
+.backdrop { background-image: url('graphics/blank-bg-tile.png'); width: 92px; height: 92px; position: absolute; }
+
+.path0 { background-image: url('graphics/path-0.png'); }
+.path1 { background-image: url('graphics/path-1.png'); }
+.path2 { background-image: url('graphics/path-2.png'); }
+.path3 { background-image: url('graphics/path-3.png'); }
+.path4 { background-image: url('graphics/path-4.png'); }
+.path5 { background-image: url('graphics/path-5.png'); }
+.path6 { background-image: url('graphics/path-6.png'); }
+.path7 { background-image: url('graphics/path-7.png'); }
+.path8 { background-image: url('graphics/path-8.png'); }
+.path9 { background-image: url('graphics/path-9.png'); }
+.path10 { background-image: url('graphics/path-10.png'); }
+.path11 { background-image: url('graphics/path-11.png'); }
+.path12 { background-image: url('graphics/path-12.png'); }
+.path13 { background-image: url('graphics/path-13.png'); }
+.path14 { background-image: url('graphics/path-14.png'); }
+.path15 { background-image: url('graphics/path-15.png'); }
+
+.marble { position: absolute; width: 28px; height: 28px; }
+.marble0 { background-image: url('graphics/marble-2.png'); }
+.marble1 { background-image: url('graphics/marble-3.png'); }
+.marble2 { background-image: url('graphics/marble-4.png'); }
+.marble3 { background-image: url('graphics/marble-5.png'); }
+
+.wheel { background-image: url('graphics/wheel.png'); transition-property: transform; transition-duration: 0.2s; }
+.wheelRotate0 { transform: rotate(0deg); }
+.wheelRotate1 { transform: rotate(90deg); }
+.wheelRotate2 { transform: rotate(180deg); }
+.wheelRotate3 { transform: rotate(270deg); }
+
+.wheel-dark { background-image: url('graphics/wheel-dark.png'); }
+
+.teleporter-h { background-image: url('graphics/teleporter-h.png'); }
+.teleporter-v { background-image: url('graphics/teleporter-v.png'); }
+
+.teleporter, .switcher, .painter, .colorFilter { z-index: 10; }
+
+.switcher0 { background-image: url('graphics/switch-13.png'); }
+.switcher1 { background-image: url('graphics/switch-20.png'); }
+.switcher2 { background-image: url('graphics/switch-31.png'); }
+.switcher3 { background-image: url('graphics/switch-02.png'); }
+
+.painter0 { background-image: url('graphics/painter-2.png'); }
+.painter1 { background-image: url('graphics/painter-3.png'); }
+.painter2 { background-image: url('graphics/painter-4.png'); }
+.painter3 { background-image: url('graphics/painter-5.png'); }
+
+.colorFilter0 { background-image: url('graphics/filter-2.png'); }
+.colorFilter1 { background-image: url('graphics/filter-3.png'); }
+.colorFilter2 { background-image: url('graphics/filter-4.png'); }
+.colorFilter3 { background-image: url('graphics/filter-5.png'); }
+
+.marbleMove
+{
+    -webkit-animation-duration: 0.4s;
+	animation-duration: 0.4s;
+	-webkit-animation-timing-function: linear;
+	animation-timing-function: linear;
+}
+
+.marbleToMiddle3
+{
+    animation-name: topToMiddle;	
+	-webkit-animation-name: topToMiddle;
+}
+
+.marbleToMiddle2
+{
+    animation-name: leftToMiddle;
+	-webkit-animation-name: leftToMiddle;
+}
+
+.marbleToMiddle1
+{
+    animation-name: bottomToMiddle;
+	-webkit-animation-name: bottomToMiddle;
+}
+
+.marbleToMiddle0
+{
+    animation-name: rightToMiddle;
+	-webkit-animation-name: rightToMiddle;
+}
+
+.marbleFromMiddle3
+{
+    animation-name: topFromMiddle;
+	-webkit-animation-name: topFromMiddle;
+}
+
+.marbleFromMiddle2
+{
+    animation-name: leftFromMiddle;
+	-webkit-animation-name: leftFromMiddle;
+}
+
+.marbleFromMiddle1
+{
+    animation-name: bottomFromMiddle;
+	-webkit-animation-name: bottomFromMiddle;
+}
+
+.marbleFromMiddle0
+{
+    animation-name: rightFromMiddle;
+	-webkit-animation-name: rightFromMiddle;
+}
+
+@keyframes topToMiddle {
+    0%   { left: 32px; top: -14px;}
+    100% { left: 32px; top: 32px; }
+}
+
+@-webkit-keyframes topToMiddle {
+    0%   { left: 32px; top: -14px;}
+    100% { left: 32px; top: 32px; }
+}
+
+@-webkit-keyframes leftToMiddle {
+    0%   { left: -14px; top: 32px;}
+    100% { left: 32px; top: 32px; }
+}
+
+@keyframes leftToMiddle {
+    0%   { left: -14px; top: 32px;}
+    100% { left: 32px; top: 32px; }
+}
+
+@-webkit-keyframes leftToMiddle {
+    0%   { left: -14px; top: 32px;}
+    100% { left: 32px; top: 32px; }
+}
+
+@keyframes rightToMiddle {
+    0%   { left: 78px; top: 32px;}
+    100% { left: 32px; top: 32px; }
+}
+
+@-webkit-keyframes rightToMiddle {
+    0%   { left: 78px; top: 32px;}
+    100% { left: 32px; top: 32px; }
+}
+
+@keyframes bottomToMiddle {
+    0%   { left: 32px; top: 78px;}
+    100% { left: 32px; top: 32px; }
+}
+
+@-webkit-keyframes bottomToMiddle {
+    0%   { left: 32px; top: 78px;}
+    100% { left: 32px; top: 32px; }
+}
+
+@keyframes topFromMiddle {
+    0%   { left: 32px; top: 32px;}
+    100% { left: 32px; top: -14px; }
+}
+
+@-webkit-keyframes topFromMiddle {
+    0%   { left: 32px; top: 32px;}
+    100% { left: 32px; top: -14px; }
+}
+
+@keyframes leftFromMiddle {
+    0%   { left: 32px; top: 32px;}
+    100% { left: -14px; top: 32px; }
+}
+
+@-webkit-keyframes leftFromMiddle {
+    0%   { left: 32px; top: 32px;}
+    100% { left: -14px; top: 32px; }
+}
+
+@keyframes rightFromMiddle {
+    0%   { left: 32px; top: 32px;}
+    100% { left: 78px; top: 32px; }
+}
+
+@-webkit-keyframes rightFromMiddle {
+    0%   { left: 32px; top: 32px;}
+    100% { left: 78px; top: 32px; }
+}
+
+@keyframes bottomFromMiddle {
+    0%   { left: 32px; top: 32px;}
+    100% { left: 32px; top: 78px; }
+}
+
+@-webkit-keyframes bottomFromMiddle {
+    0%   { left: 32px; top: 32px;}
+    100% { left: 32px; top: 78px; }
+}
+
+#editortiles
+{
+}
+
+.editortile
+{
+    display: inline-block;
+	position: inherit;
+	border: solid 5px White;
+}
+
+.editortile.selected
+{
+    border: solid 5px Red;
+}
+
+.editortile:hover:not(.selected)
+{
+    border: dotted 5px Red;
+}
+
+.inEdit .backdrop:hover {
+    opacity:0.7;
+}
+

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+<title></title>
+<link rel="stylesheet" type="text/css" href="patho.css" />
+</head>
+<body>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script type="text/javascript">
+
+var g = {
+
+    wheel_steps: 4,
+timer_width: 36,
+timer_margin: 4,
+tileoffset: [0,28],
+default_colors: [2,3,4,6],   // Blue, Green, Yellow, Red
+default_stoplight: [6,4,3],  // Red, Yellow, Green
+default_launch_timer: 6,     // 6 passes
+default_board_timer: 30,     // 30 seconds per wheel
+marble_speed: 2,             // Marble speed in pixels/frame (must be 1, 2 or 4)
+trigger_time: 30,            // 30 seconds
+replicator_delay: 35,        // 35 frames
+horiz_tiles: 8,
+vert_tiles: 6,
+screen_width: 800,
+screen_height: 600,
+marble_size: 28,
+tile_size: 92,
+wheel_margin: 4,
+stoplight_marble_size: 28,
+life_marble_size: 16,
+holecoord: [],
+isUseTouchEvents: ('ontouchstart' in document.documentElement),
+fps: 60
+};
+
+// The positions of the holes in the wheels in each of the rotational positions
+
+g.holecenter_radius = (g.tile_size - g.marble_size) / 2 - g.wheel_margin;
+
+for (var i=0;i<g.wheel_steps;i++) {
+    var theta = Math.PI * 2 * i / (g.wheel_steps);
+	var x = Math.floor( 0.5 + Math.cos(theta)*g.holecenter_radius) + (g.tile_size/2) - (g.marble_size / 2);
+	var y = Math.floor( 0.5 + Math.sin(theta)*g.holecenter_radius) + (g.tile_size/2) - (g.marble_size / 2);
+	
+	g.holecoord.push([x,y]);
+}
+
+// Direction references
+var dirs = ((0,-1),(1,0),(0,1),(-1,0));
+
+g.board_width = g.horiz_tiles * g.tile_size;
+g.board_height = g.vert_tiles * g.tile_size;
+g.launch_timer_pos = [0, g.info_height];
+g.board_pos = [g.timer_width, g.info_height + g.marble_size];
+g.timer_height = g.board_height + g.marble_size;
+
+
+$(function(){
+
+var useLevelEditor = false;
+
+var loadLevel = true;
+
+
+if (loadLevel)
+{
+   var levelConfig = new LevelConfig();
+   levelConfig.levelsLoaded = function(){
+      var board = levelConfig.levels[0].getBoard($('#game'));
+	  currentPlayer = new BoardPlayer(board);
+   };
+  
+   
+}
+else if (!useLevelEditor)
+{
+
+// test board
+var board = new Board($('#game'));
+
+var theWheel = new Wheel();
+theWheel.addToTile(board.getTile(0,0));
+
+var wheel2 = new Wheel();
+wheel2.addToTile(board.getTile(3,0));
+wheel2.enterMarble(1, new Marble(board, 1));
+
+var wheel3 = new Wheel();
+wheel3.addToTile(board.getTile(0,3));
+
+var wheel4 = new Wheel();
+wheel4.addToTile(board.getTile(3,3));
+
+var path1 = new Path(10);
+path1.addToTile(board.getTile(1,0));
+
+var path2 = new Path(10);
+path2.addToTile(board.getTile(2,0));
+
+new Path(15).addToTile(board.getTile(1,3));
+new Path(10).addToTile(board.getTile(2,3));
+new Path(5).addToTile(board.getTile(0,2));
+var px = new Path(5)
+px.addToTile(board.getTile(3,1));
+px.addSwitcher(new Switcher(1));
+new Path(5).addToTile(board.getTile(3,2));
+
+var ppainter = new Path(5);
+ppainter.addToTile(board.getTile(0,1));
+ppainter.addPainter(new Painter(1));
+
+var marble = new Marble(board, 0);
+theWheel.enterMarble(0, marble);
+
+theWheel.enterMarble(1, new Marble(board, 1));
+theWheel.enterMarble(2, new Marble(board, 1));
+theWheel.enterMarble(3, new Marble(board, 1));
+
+new Path(10).addToTile(board.getTile(4,3));
+
+var tp = new Teleporter(true);
+board.getTile(4,3).tileObject.addTeleporter(tp);
+
+new Path(10).addToTile(board.getTile(2,4));
+new Path(10).addToTile(board.getTile(3,4));
+board.getTile(2,4).tileObject.addTeleporter(new Teleporter(true));
+new Wheel().addToTile(board.getTile(4,4));
+new Wheel().addToTile(board.getTile(1,4));
+new Wheel().addToTile(board.getTile(5,3));
+new Wheel().addToTile(board.getTile(5,0));
+var pathWithFilter = new Path(10);
+pathWithFilter.addToTile(board.getTile(4,0));
+pathWithFilter.addColorFilter(new ColorFilter(0));
+
+currentPlayer = new BoardPlayer(board);
+}
+
+else{
+
+var leveleditor = new LevelEditor($('#game'));
+
+}
+
+});
+
+// 0 rechts, 1 unten, 2 links, 3 oben
+</script>
+
+<script src="./paths.js"></script>
+<script src="./modifiers.js"></script>
+<script src="./levels.js"></script>
+<script src="./leveleditor.js"></script>
+
+<div id="game">
+
+</div>
+</body>
+</html>
